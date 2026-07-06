@@ -1,3 +1,4 @@
+import ProductViews from "@/views/ProductView";
 import { ProductType } from "../../components/fragments/Product.type";
 
 
@@ -8,7 +9,7 @@ type Props = {
 const ProductPage = ({product}:Props) => {
     return (
         <div>
-            <ProductPage product={product} />
+            <ProductViews product={product} />
         </div>
     )
 }
