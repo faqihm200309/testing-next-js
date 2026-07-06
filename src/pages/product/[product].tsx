@@ -80,38 +80,38 @@ const DetailProductPage = ({ product }: Props) => {
 export default DetailProductPage;
 
 // Server Side Rendering (SSR)
-// export async function getServerSideProps(context:any) {
-//   const {product} = context.params
-//   const res = await fetch(`http://localhost:3000/api/product/${product}`);
-//   const response = await res.json();
-//   console.log(response.data)
-//   return {
-//     props: {
-//       product: response.data,
-//     },
-//   };
-// }
-
-export async function getStaticPaths() {
-  const res = await fetch(`http://localhost:3000/api/product/`);
+export async function getServerSideProps(context:any) {
+  const {product} = context.params
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/product/${product}`);
   const response = await res.json();
-  const paths = response.data.map((item: ProductType) => ({
-    params: {
-      product: item.id
-    }
-  }))
-
-  return { paths, fallback: false }
-}
-
-export async function getStaticProps(context: any) {
-  const { product } = context.params;
-  const res = await fetch(`http://localhost:3000/api/product/${product}`);
-  const response = await res.json();
-
+  console.log(response.data)
   return {
     props: {
-      product: response.data
-    }
-  }
+      product: response.data,
+    },
+  };
 }
+
+// export async function getStaticPaths() {
+//   const res = await fetch(`http://localhost:3000/api/product/`);
+//   const response = await res.json();
+//   const paths = response.data.map((item: ProductType) => ({
+//     params: {
+//       product: item.id
+//     }
+//   }))
+
+//   return { paths, fallback: false }
+// }
+
+// export async function getStaticProps(context: any) {
+//   const { product } = context.params;
+//   const res = await fetch(`http://localhost:3000/api/product/${product}`);
+//   const response = await res.json();
+
+//   return {
+//     props: {
+//       product: response.data
+//     }
+//   }
+// }
